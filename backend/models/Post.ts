@@ -25,13 +25,13 @@ const PostSchema = new Schema<PostDocument>({
     description:{
         type:String,
         required: function (this: PostDocument){
-            return !this.image;
+           return !this.image;
         }
     },
-    image:{
+  image:{
         type: String,
         required: function (this: PostDocument){
-            return !this.image;
+           return !this.description;
         }
     },
     user: {

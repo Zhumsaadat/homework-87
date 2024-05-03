@@ -26,4 +26,5 @@ export interface CommentMutation {
     user: string;
     post: string;
     text: string;
+    date: string
 }
