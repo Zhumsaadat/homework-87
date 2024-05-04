@@ -10,8 +10,8 @@ const postsRoutes = express.Router();
 
 postsRoutes.get('/', async (req, res, next) => {
   try {
-    const posts = await Post.find();
-    if (!posts || posts.length === 0) {
+    const posts = await Post.find().sort({date: -1});
+    if (!posts) {
       console.log('No posts found');
       return res.status(404).send('No posts found');
     }
