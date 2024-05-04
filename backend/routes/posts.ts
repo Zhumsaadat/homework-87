@@ -1,7 +1,6 @@
 import express from 'express';
 import Post from '../models/Post';
 import User from '../models/User';
-import { PostMutation } from '../types';
 import { format } from 'date-fns';
 import commentRouter from './comments';
 import { imagesUpload } from '../multer';
@@ -11,7 +10,7 @@ const postsRoutes = express.Router();
 
 postsRoutes.get('/', async (req, res, next) => {
   try {
-    const posts: PostMutation[] = await Post.find();
+    const posts = await Post.find();
     if (!posts || posts.length === 0) {
       console.log('No posts found');
       return res.status(404).send('No posts found');
@@ -22,8 +21,8 @@ postsRoutes.get('/', async (req, res, next) => {
     if (posts) {
       for (const post of posts) {
         const user = await User.findById(post.user);
-        console.log(post)
         const postWithUserName = {
+          _id: post._id,
           user: user?.username,
           title: post.title,
           image: post.image,
